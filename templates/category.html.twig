@@ -1,0 +1,24 @@
+{% include "base.html.twig" %}
+{% include "header.html.twig" %}
+
+
+    {% for product in products %}
+    <a href="/product/{{ product.id }}">
+        <div class="row category">
+            <div class="col-md-3">
+                <img src="{{  asset('uploads/images/products/'~product.image) }}" style="max-width: 100%">
+            </div>
+            <div class="col-md-9">
+                <div>
+                    <h3> {{ product.name }}</h3>
+                </div>
+                <div>
+                    <p> {{ product.description }}</p>
+                </div>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+
+
+{% include "footer.html.twig" %}

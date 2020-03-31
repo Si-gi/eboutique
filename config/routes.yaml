@@ -1,0 +1,28 @@
+homepage:
+    path: /
+    controller: App\Controller\DefaultController::index
+# app/config/routing.yml
+fos_user:
+  resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+jefaisuntest:
+  path: /index
+  controller: App\Controller\DefaultController::index
+
+category:
+  path: /category/{category}
+  controller: App\Controller\DefaultController::category
+product:
+  path: /product/{id}
+  controller: App\Controller\DefaultController::product
+addToCart:
+  path: /ezzerz/{id}
+  controller: App\Controller\CartController::addItem
+cart:
+  path: /cart/{id}
+  controller: App\Controller\CartController::checkout
+update_quantity:
+  path: /update_qte
+  controller: App\Controller\CartController::updateQuantity
+delete_purchase_item:
+  path: /delete_item
+  controller: App\Controller\CartController::deleteItem

@@ -1,0 +1,44 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% if error %}
+    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+{% endif %}
+
+<form action="{{ path("fos_user_security_check") }}" method="post">
+    {% if csrf_token %}
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+    {% endif %}
+
+    <label for="username">{{ 'security.login.username'|trans }}</label>
+    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username" />
+
+    <label for="password">{{ 'security.login.password'|trans }}</label>
+    <input type="password" id="password" name="_password" required="required" autocomplete="current-password" />
+
+    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+    <label for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
+
+    <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+</form>
+<div class="collapse navbar-collapse" id="navbarResponsive">
+    <form action="{{ path("fos_user_security_check") }}" method="post">
+        <div class="form-group">
+            {% if csrf_token is defined %}
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+            {% endif %}
+            <label for="exampleInputEmail1">Email address or Pseudo</label>
+            <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}" required="required" autocomplete="username" placeholder="login"/>
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+
+            <label for="exampleInputPassword1">Password</label>
+            <input class="form-control" type="password" id="password" name="_password" required="required" autocomplete="current-password" placeholder="mot de passe" />
+
+
+            <input type="checkbox" class="checkbox-inline" id="remember_me" name="_remember_me" value="on" />
+
+            <input class="btn btn-primary" type="submit" id="_submit" name="_submit" value="{{ 'Confirmer'|trans }}" />
+
+            <a class="nav-link" href="#">Inscription</a>
+        </div>
+    </form>
+</div>
