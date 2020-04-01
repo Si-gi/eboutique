@@ -21,7 +21,7 @@
                 {% for item in items %}
 
 
-                <li class="list-group-item d-flex justify-content-between lh-condensed" id="group-item-"{{ item.quantity }}>
+                <li class="list-group-item d-flex justify-content-between lh-condensed" id="group-item-{{ item.id }}">
                     <div>
                         <h6 class="my-0"> {{ item.product }}</h6>
                         <small class="text-muted">Brief description</small>
@@ -37,7 +37,7 @@
                         <i class="fa fa-angle-up">-1</i>
                     </span>
                     </button>
-                    <button class="btn-danger" id="delete" value="{{ item.id }}"><span>Supprimer</span></button>
+                    <button class="btn-danger delete" id="delete" value="{{ item.id }}"><span>Supprimer</span></button>
 
                 </li>
                 {% endfor %}
@@ -275,7 +275,7 @@
 </script>
 <script>
     $(document).on('click', '.delete', function(){
-        let postData = 'id=' + this.id;
+        let postData = 'id=' + this.value;
         let value = this.value;
         $.ajax({
             url:'{{ (path('delete_purchase_item')) }}',
@@ -286,12 +286,13 @@
             success: function (data)
             {
                 var json = JSON.parse(data);
+                console.log(json);
                 document.getElementById('group-item-'+json.output).remove();
 
             },
             error: function(data)
             {
-                console.log(nop);
+                console.log(data);
             }
         });
     });
