@@ -34,7 +34,7 @@ class addressType extends AbstractType
             ->add('country')
         ->add('submit', SubmitType::class,
             [
-                'attr' => ['class' => 'form-control btn-primary pull-right'],
+                'attr' => ['class' => ' btn-primary'],
                 'label' => 'Confirmer'
             ]);
     }
