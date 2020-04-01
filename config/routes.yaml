@@ -26,3 +26,9 @@ update_quantity:
 delete_purchase_item:
   path: /delete_item
   controller: App\Controller\CartController::deleteItem
+address_form:
+  path: /add_address
+  controller: App\Controller\AddressController::addAddress
+address:
+  path: /address
+  controller: App\Controller\AddressController::address
