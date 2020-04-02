@@ -1,0 +1,29 @@
+{% extends 'bundles/FOSUserBundle/layout.html.twig' %}
+
+{% block fos_user_content %}
+<table class="table">
+    <thead>
+    <tr>
+        <td scope="col">Nom</td>
+        <td scope="col">Telephone</td>
+        <td scope="col">Adresse</td>
+        <td scope="col">Code Postal</td>
+        <td scope="col">Ville</td>
+        <td scope="col">Pays</td>
+    </tr>
+    </thead>
+    <tbody>
+        {% for address in adre%}
+            <tr>
+
+                <td>{{ address.name }}</td>
+                <td>{{ address.phone }}</td>
+                <td>{{ address.address }}</td>
+                <td>{{ address.cp }}</td>
+                <td>{{ address.city }}</td>
+                <td>{{ address.country }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock fos_user_content %}

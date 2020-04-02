@@ -3,10 +3,8 @@
 namespace App\Controller;
 
 use App\Entity\Address;
-use App\Entity\BlogPost;
 use App\Entity\User;
 use App\Form\addressType;
-use App\Form\ArticleFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -19,6 +17,9 @@ class AddressController extends AbstractController
     private $entityManager;
     /** @var \Doctrine\Common\Persistence\ObjectRepository */
     private $userRepository;
+    /** @var \Doctrine\Common\Persistence\ObjectRepository */
+    private $addressRepository;
+
 
     /**
      * @param EntityManagerInterface $entityManager
@@ -27,6 +28,8 @@ class AddressController extends AbstractController
     {
         $this->entityManager = $entityManager;
         $this->userRepository = $entityManager->getRepository(User::class);
+        $this->addressRepository = $entityManager->getRepository(Address::class);
+
     }
 
     /**
@@ -37,6 +40,9 @@ class AddressController extends AbstractController
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function addAddress(Request $request){
+        if($this->getUser() == null){
+          return $this->redirectToRoute('fos_user_security_login');
+        }
         $address = new Address();
 
         $user = $this->userRepository->find($this->getUser());
@@ -63,12 +69,27 @@ class AddressController extends AbstractController
     }
 
     public function getAddress(Request $request){
+        if($this->getUser() == null){
+            return $this->redirectToRoute('fos_user_security_login');
+        }
+        $adress = $this->addressRepository->find($request->request->get('id'));
 
-        $arrData = ['output' => $request->request->get('id')];
+        $arrData = [
+                    'name' => $adress->getName(),
+                    'address' => $adress->getAddress(),
+                    'phone' => $adress->getPhone(),
+                    'cp'    => $adress->getCp(),
+                    'city' => $adress->getCity(),
+                    'country' => $adress->getCountry()
+                    ];
         return new JsonResponse($arrData);
     }
 
     public function address(){
-        return $this->render('addresses.html.twig');
+        if($this->getUser() == null){
+            return $this->redirectToRoute('fos_user_security_login');
+        }
+        return $this->render('addresses.html.twig',
+        ['adre' => $this->getUser()->getAddress()]);
     }
 }

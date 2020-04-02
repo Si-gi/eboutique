@@ -20,7 +20,9 @@ services:
     App\Repository\CartRepository:
         autowire: true
         tags: ['doctrine.repository_service']
-
+    App\Repository\AddressRepository:
+        autowire: true
+        tags: ['doctrine.repository_service']
 
 
 

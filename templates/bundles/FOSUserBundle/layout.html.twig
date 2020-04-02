@@ -47,9 +47,10 @@
         <a href="{{ path('fos_user_security_logout') }}">
             {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
         </a>
-<a href="{{ path('fos_user_profile_edit') }}"> profile
+        <a href="{{ path('fos_user_profile_edit') }}"> profile
         </a>
-        <a href="{{ path('address_form') }}"> adresse </a>
+        <a href="{{ path('address_form') }}">Ajouter une adresse </a>
+        <a href="{{ path('address') }}"> vos adresse </a>
     {% else %}
         <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
     {% endif %}

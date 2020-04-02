@@ -9,6 +9,7 @@ use App\Entity\Product;
 use App\Entity\Purchase;
 use App\Entity\User;
 use App\Entity\Cart;
+use App\Entity\Address;
 use App\Entity\PurchaseItem;
 use Doctrine\ORM\EntityManagerInterface;
 use phpDocumentor\Reflection\DocBlock\Description;
@@ -32,6 +33,8 @@ class CartController extends AbstractController
     private $purchasedItemRepository;
     /** @var \Doctrine\Common\Persistence\ObjectRepository */
     private $userRepository;
+    /** @var \Doctrine\Common\Persistence\ObjectRepository */
+    private $addressRepository;
 
     /**
      * @param EntityManagerInterface $entityManager
@@ -44,12 +47,14 @@ class CartController extends AbstractController
         $this->cartRepository = $entityManager->getRepository(Cart::class);
         $this->userRepository = $entityManager->getRepository(User::class);
         $this->purchasedItemRepository = $entityManager->getRepository(PurchaseItem::class);
+
     }
 
     /**
      * @Route("/ezzerz/{id}", name="homepage")
      */
     public function addItem($id, Request $request){
+
         if(!$this->getUser()){
             return $this->redirectToRoute("fos_user_security_login", array($request->attributes->get('_route')));
         }
@@ -91,9 +96,12 @@ class CartController extends AbstractController
      * @Route("/cart/{id}", name="cart")
      */
     public function checkout($id){
+        if($this->getUser() == null){
+            return $this->redirectToRoute('fos_user_security_login');
+        }
         $user =$this->userRepository->find($this->getUser());
         $cart = $this->cartRepository->find($user->getCart());
-
+        $address = $user->getAddress();
         $purchased_items = $cart->getPurchasedItems();
         $purchased_items = $purchased_items->toArray();
         $total_quantity = 0;
@@ -104,6 +112,7 @@ class CartController extends AbstractController
         }
         return $this->render("checkout.html.twig",
             [
+                'adres' => $address,
                 't_price' => $t_price,
                 'qte' => $total_quantity,
                 'items' => $purchased_items,
@@ -116,7 +125,9 @@ class CartController extends AbstractController
      * @Route("/update_qte", name="update_quantity")
      */
     public function updateQuantity(Request $request){
-
+        if($this->getUser() == null){
+            return $this->redirectToRoute('fos_user_security_login');
+        }
         if($request->request->get('id') && $request->request->get('qte')){
             $purchased_item = $this->purchasedItemRepository->find( $request->request->get('id'));
             $purchased_item->setQuantity($purchased_item->getQuantity()+ $request->request->get('qte'));
@@ -134,7 +145,9 @@ class CartController extends AbstractController
      * @Route("/delete_item", name="delete_item")
      */
     public function deleteItem(Request $request){
-
+        if($this->getUser() == null){
+            return $this->redirectToRoute('fos_user_security_login');
+        }
         if($request->request->get('id')){
             $purchased_item = $this->purchasedItemRepository->find( $request->request->get('id'));
             $this->entityManager->remove($purchased_item);

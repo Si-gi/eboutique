@@ -32,3 +32,6 @@ address_form:
 address:
   path: /address
   controller: App\Controller\AddressController::address
+getOneAddress:
+  path: /oneAddress
+  controller: App\Controller\AddressController::getAddress
