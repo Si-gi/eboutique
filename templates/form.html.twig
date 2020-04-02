@@ -1,0 +1,26 @@
+{# Template/blog/comment/form.html.twig #}
+{% block content %}
+{% block body %}
+<div class="row">
+    <div class="col-sm-12 blog-main">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="bg-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+            {{ form_start(form) }}
+        <div class="form-group col-md-4 pull-right">
+            {{ form_widget(form.comment) }}
+        </div>
+        <div class="form-group col-md-4 pull-right">
+            {{ form_widget(form.submit) }}
+        </div>
+        {{ form_end(form) }}
+
+
+    </div>
+</div>
+{% endblock body %}
+{% endblock content %}
