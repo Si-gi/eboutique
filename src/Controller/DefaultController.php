@@ -76,18 +76,25 @@ class DefaultController  extends AbstractController
                 $this->addFlash('success', 'Commentaire posté');
 
             }
+            return $this->render("product.html.twig",
+                [
+                    'form' => $form->createView(),
+                    'comments' => $comments,
+                    'product' => $product,
+                    'categorys' => $categorys = $this->categoryRepository->findAll()
 
+                ]);
         }
-
-
         return $this->render("product.html.twig",
             [
-                'form' => $form->createView(),
                 'comments' => $comments,
                 'product' => $product,
                 'categorys' => $categorys = $this->categoryRepository->findAll()
 
-        ]);
+            ]);
+
+
+
     }
     /**
      * @Route("/category/{category}", name="category")

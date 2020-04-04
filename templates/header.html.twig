@@ -34,17 +34,14 @@
         {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
 
             <a href=" {{ path('fos_user_profile_edit') }}">edit</a> |
+            <a href="/cart/5"><span class="glyphicon glyphicon-shopping-cart"></span>Panier</a> |
             <a href="{{ path('fos_user_security_logout') }}">{{ 'layout.logout'|trans({}, 'FOSUserBundle') }}</a> |
-            <a href="/cart/5"><span class="glyphicon glyphicon-shopping-cart"></span>Panier</a>
+
         {% else %}
             <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
 
         {% endif %}
 
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
     </div>
 </nav>
 {% endblock %}

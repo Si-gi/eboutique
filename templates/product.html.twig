@@ -1,9 +1,8 @@
-{% include "base.html.twig" %}
 {% include "header.html.twig" %}
 
 <div class="row">
     <div class="col-md-6"><img src="{{ asset('uploads/images/products/'~product.image) }}"></div>
-    <div class="col-md-6">
+    <div class="col-md-3">
         <ul  class="list-group">
             <li class="list-group-item">{{product.name}}</li>
             <li class="list-group-item">{{product.description}}</li>
@@ -24,6 +23,7 @@
                 </div>
             {% endfor %}
         {% endfor %}
+        {% if form is defined %}
         {{ form_start(form) }}
         <div class="form-group col-md-4 pull-right">
             {{ form_widget(form.comment) }}
@@ -32,21 +32,34 @@
             {{ form_widget(form.submit) }}
         </div>
         {{ form_end(form) }}
-
+        {% endif %}
 
     </div>
 </div>
-<div class="row comments">
+<div class="container comment_section">
     {% for comment in comments %}
         <div class="comment">
-            <div>
-                <div>{{ comment.user }} :</div>
+            <div class="author_comment">
+                <div>{{ comment.user }} : {{ comment.comment }} </div>
             </div>
-            <div style="border-bottom: 3px solid black; padding: 50px;">
-                <div><p>{{ comment.comment }} </p></div>
-            </div>
+
         </div>
 
     {% endfor %}
 </div>
+<style>
+    .comment_section{
+        margin-top: 15px;
+    }
+    .comment{
+        border: 1px solid darkgrey;
+        border-radius: 4px;
+    }
+    .author_comment{
+        padding-left: 2px;
+        padding-bottom: 5px;
+        border-bottom: 1px solid darkgrey ;
+    }
+
+</style>
 {% include "footer.html.twig" %}
