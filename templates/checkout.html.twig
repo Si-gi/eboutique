@@ -7,8 +7,8 @@
 <div class="container">
     <div class="py-5 text-center">
 
-        <h2>Checkout form</h2>
-        <p class="lead">Below is an example form built entirely with Bootstrap's form controls. Each required form group has a validation state that can be triggered by attempting to submit the form without completing it.</p>
+        <h2>Formulaire de paiment</h2>
+        <p class="lead">Voici le formulaire de paiement. Vous pouvez séléctionner les adresses ajoutés à votre profile</p>
     </div>
 
     <div class="row">
@@ -28,13 +28,13 @@
                     </div>
                     <button class="down" type="submit" id="{{ item.id }}" name="upPlace" value="1" >
                     <span>
-                        <i class="fa fa-angle-down"></i>
+                        <i class="fa fa-angle-up"></i>
                     </span>
                     </button>
                     <span class="text-muted" id="item-{{ item.id }}">{{ item.quantity }}</span>
                     <button class="down" id="{{ item.id }}" type="submit" name="downPlace" value="-1">
                     <span>
-                        <i class="fa fa-angle-up"></i>
+                        <i class="fa fa-angle-down"></i>
                     </span>
                     </button>
                     <button class="btn-danger delete" id="delete" value="{{ item.id }}"><span>Supprimer</span></button>
@@ -72,10 +72,17 @@
             <form class="needs-validation" novalidate>
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="firstName">First name</label>
+                        <label for="firstName">Prenom</label>
                         <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
                         <div class="invalid-feedback">
-                            Valid first name is required.
+                            Un prénom valide est nécessaire
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="firstName">Nom</label>
+                        <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+                        <div class="invalid-feedback">
+                            Un nom valide est nécessaire
                         </div>
                     </div>
                 </div>
@@ -117,24 +124,24 @@
                 <hr class="mb-4">
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="same-address">
-                    <label class="custom-control-label" for="same-address">Shipping address is the same as my billing address</label>
+                    <label class="custom-control-label" for="same-address">L'adresse de livraison est la même que celle de facturatoin</label>
                 </div>
                 <div class="custom-control custom-checkbox">
                     <input type="checkbox" class="custom-control-input" id="save-info">
-                    <label class="custom-control-label" for="save-info">Save this information for next time</label>
+                    <label class="custom-control-label" for="save-info">Sauvegarder les informations pour la prochaine fois</label>
                 </div>
                 <hr class="mb-4">
 
-                <h4 class="mb-3">Payment</h4>
+                <h4 class="mb-3">Paiment</h4>
 
                 <div class="d-block my-3">
                     <div class="custom-control custom-radio">
                         <input id="credit" name="paymentMethod" type="radio" class="custom-control-input" checked required>
-                        <label class="custom-control-label" for="credit">Credit card</label>
+                        <label class="custom-control-label" for="credit">Carte bleu</label>
                     </div>
                     <div class="custom-control custom-radio">
                         <input id="debit" name="paymentMethod" type="radio" class="custom-control-input" required>
-                        <label class="custom-control-label" for="debit">Debit card</label>
+                        <label class="custom-control-label" for="debit">Carte de crédit</label>
                     </div>
                     <div class="custom-control custom-radio">
                         <input id="paypal" name="paymentMethod" type="radio" class="custom-control-input" required>
@@ -143,7 +150,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="cc-name">Name on card</label>
+                        <label for="cc-name">Nom</label>
                         <input type="text" class="form-control" id="cc-name" placeholder="" required>
                         <small class="text-muted">Full name as displayed on card</small>
                         <div class="invalid-feedback">
@@ -151,7 +158,7 @@
                         </div>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="cc-number">Credit card number</label>
+                        <label for="cc-number">Numero de carte</label>
                         <input type="text" class="form-control" id="cc-number" placeholder="" required>
                         <div class="invalid-feedback">
                             Credit card number is required

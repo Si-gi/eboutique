@@ -1,24 +1,32 @@
 {% include "base.html.twig" %}
 {% include "header.html.twig" %}
 
-
+<div style="margin-top: 15px">
     {% for product in products %}
-    <a href="/product/{{ product.id }}">
-        <div class="row category">
-            <div class="col-md-3">
-                <img src="{{  asset('uploads/images/products/'~product.image) }}" style="max-width: 100%">
-            </div>
-            <div class="col-md-9">
-                <div>
-                    <h3> {{ product.name }}</h3>
+        <div class="category-product">
+            <a href="/product/{{ product.id }}">
+                <div class="row category">
+                    <div class="col-md-3">
+                        <img src="{{  asset('uploads/images/products/'~product.image) }}" style="max-width: 100%">
+                    </div>
+                    <div class="col-md-9">
+                        <div>
+                            <h3> {{ product.name }}</h3>
+                        </div>
+                        <div>
+                            <p> {{ product.description }}</p>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <p> {{ product.description }}</p>
-                </div>
-            </div>
+            </a>
         </div>
-    </a>
     {% endfor %}
-
-
+</div>
+<style>
+    .category-product{
+        border: 2px solid  #7c8ea3;
+        margin-top: 1px;
+        text-align: center;
+    }
+</style>
 {% include "footer.html.twig" %}

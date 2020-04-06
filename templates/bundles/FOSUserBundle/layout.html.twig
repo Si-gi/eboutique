@@ -51,6 +51,7 @@
         </a>
         <a href="{{ path('address_form') }}">Ajouter une adresse </a>
         <a href="{{ path('address') }}"> vos adresse </a>
+        <a href="{{ path('homepage') }}">Retour au site</a>
     {% else %}
         <a href="{{ path('fos_user_security_login') }}">{{ 'layout.login'|trans({}, 'FOSUserBundle') }}</a>
     {% endif %}
@@ -74,7 +75,7 @@
             {% endfor %}
         {% endfor %}
     {% endif %}
-    <div>
+    <div class="container">
         {% block fos_user_content %}
         {% endblock fos_user_content %}
 

@@ -67,7 +67,7 @@ class CartController extends AbstractController
 
         $cart = $this->cartRepository->find($user->getCart());
         $purchased_items = $cart->getPurchasedItems();
-
+        $purchased = false;
         foreach ($purchased_items->toArray() as $purchased_item){
             $pi = $this->purchasedItemRepository->find($purchased_item);
             if( $pi->getProduct() == $product){
@@ -89,13 +89,15 @@ class CartController extends AbstractController
         $this->entityManager->flush($pi);
         $this->entityManager->persist($cart);
         $this->entityManager->flush($cart);
+
+        $this->addFlash('success', 'Article ajouté au panier');
         return $this->redirectToRoute("product",array("id" =>$id));
     }
 
     /**
-     * @Route("/cart/{id}", name="cart")
+     * @Route("cart/", name="cart")
      */
-    public function checkout($id){
+    public function checkout(){
         if($this->getUser() == null){
             return $this->redirectToRoute('fos_user_security_login');
         }

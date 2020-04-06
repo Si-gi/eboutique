@@ -1,5 +1,11 @@
 {% include "header.html.twig" %}
-
+ {% for label, messages in app.flashes %}
+     {% for message in messages %}
+         <div class="bg-{{ label }}">
+             {{ message }}
+         </div>
+     {% endfor %}
+ {% endfor %}
 <div class="row">
     <div class="col-md-6"><img src="{{ asset('uploads/images/products/'~product.image) }}"></div>
     <div class="col-md-3">
@@ -13,9 +19,8 @@
         </a>
     </div>
 </div>
+<div class="container comment_section">
 
-<div class="row">
-    <div class="col-sm-12 blog-main">
         {% for label, messages in app.flashes %}
             {% for message in messages %}
                 <div class="bg-{{ label }}">
@@ -25,18 +30,15 @@
         {% endfor %}
         {% if form is defined %}
         {{ form_start(form) }}
-        <div class="form-group col-md-4 pull-right">
+
             {{ form_widget(form.comment) }}
-        </div>
-        <div class="form-group col-md-4 pull-right">
             {{ form_widget(form.submit) }}
-        </div>
+
         {{ form_end(form) }}
         {% endif %}
 
-    </div>
-</div>
-<div class="container comment_section">
+
+
     {% for comment in comments %}
         <div class="comment">
             <div class="author_comment">

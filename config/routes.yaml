@@ -4,6 +4,10 @@ homepage:
 # app/config/routing.yml
 fos_user:
   resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+easy_admin_bundle:
+  resource: '@EasyAdminBundle/Controller/EasyAdminController.php'
+  prefix: /admin
+  type: annotation
 jefaisuntest:
   path: /index
   controller: App\Controller\DefaultController::index
@@ -18,7 +22,7 @@ addToCart:
   path: /ezzerz/{id}
   controller: App\Controller\CartController::addItem
 cart:
-  path: /cart/{id}
+  path: cart/
   controller: App\Controller\CartController::checkout
 update_quantity:
   path: /update_qte

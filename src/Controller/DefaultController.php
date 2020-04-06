@@ -1,9 +1,11 @@
 <?php
 
+
 namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Form\CommentType;
+use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,12 +13,8 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Category;
 use App\Entity\Product;
 
-/**
- * @package App\Controller
- * @Route("/article", name="article")
- */
 
-class DefaultController  extends AbstractController
+class DefaultController extends AbstractController
 {
 
     /** @var EntityManagerInterface */
@@ -41,6 +39,7 @@ class DefaultController  extends AbstractController
      */
     public function index()
     {
+
         $products = $this->productRepository->findAll();
         $categorys = $this->categoryRepository->findAll();
         return $this->render('index.html.twig', [
@@ -49,15 +48,20 @@ class DefaultController  extends AbstractController
         ]);
     }
 
+    public function indexAction()
+    {
+
+    }
+
     /**
      * @Route("/product/{id}", name="product")
      */
-    public function product($id,Request $request){
+    public function product($id, Request $request)
+    {
         $product = $this->productRepository->find($id);
         $comments = $product->getComments();
 
-        if($this->getUser() != null)
-        {
+        if ($this->getUser() != null) {
             $Comment = new Comment();
             $user = $this->getUser();
             $Comment->setUser($user);
@@ -94,12 +98,13 @@ class DefaultController  extends AbstractController
             ]);
 
 
-
     }
+
     /**
      * @Route("/category/{category}", name="category")
      */
-    public function category($category){
+    public function category($category)
+    {
 
         $category = $this->categoryRepository->find($category);//new Category($category);
 
@@ -109,10 +114,10 @@ class DefaultController  extends AbstractController
         $categorys = $this->categoryRepository->findAll();
 
         return $this->render("category.html.twig",
-        [
-            'products' => $products,
-            'categorys' => $categorys
-        ]);
+            [
+                'products' => $products,
+                'categorys' => $categorys
+            ]);
     }
 
 }
